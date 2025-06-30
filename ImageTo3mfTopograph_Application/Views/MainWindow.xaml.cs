@@ -112,7 +112,6 @@ namespace ImageTo3mfTopograph_Application.Views
                 PreviewImage.Visibility = Visibility.Visible;
                 DropHint.Visibility = Visibility.Collapsed;
 
-                ProcessImageToMasks();
                 ErrorMessage.Text = $"Image loaded successfully!";
             }
             catch (Exception ex)
@@ -172,6 +171,11 @@ namespace ImageTo3mfTopograph_Application.Views
                 {
                     TryLoadImage(dialog.FileName);
                 }
+            }
+            else
+            {
+                ImageLoader.colorMasks = ImageAnalyzer.GetColorMasks();
+                ImageLoader.SaveMasksToDirectory(ImageLoader.colorMasks, "C:\\Users\\mdomn\\Downloads\\GeneratedMasks");
             }
         }
     }
