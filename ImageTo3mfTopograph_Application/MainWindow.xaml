@@ -1,0 +1,264 @@
+﻿<Window x:Class="ImageTo3mfTopograph_Application.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ImageTo3mfTopograph"
+        Height="420"
+        Width="400"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        FontFamily="Cambria"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <!-- Rounded Button Style -->
+        <Style x:Key="RoundedButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#00B37E"/>
+            <Setter Property="Foreground" Value="#1F2937"/>
+            <Setter Property="BorderBrush" Value="#00B37E"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Cursor" Value="Arrow"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#20D6A1"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#00A06A"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Border CornerRadius="12" Background="#F9FAF8">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Title Bar -->
+            <Border Grid.Row="0"
+                    Background="#00B37E"
+                    Height="32"
+                    MouseDown="TitleBar_MouseDown"
+                    CornerRadius="12,12,0,0">
+                <DockPanel LastChildFill="True">
+                    <TextBlock Text="Ito3mf"
+                               FontWeight="Bold"
+                               FontSize="14"
+                               Foreground="White"
+                               VerticalAlignment="Center"
+                               Margin="10,0,0,0"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <!-- Minimize Button -->
+                        <Button Width="36"
+                                Height="32"
+                                Background="Transparent"
+                                Foreground="White"
+                                FontWeight="Bold"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                Click="MinimizeButton_Click">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="border"
+                                            Background="Transparent"
+                                            CornerRadius="6">
+                                        <TextBlock Text="–"
+                                                   FontSize="16"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="#20D6A1"/>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="#00A06A"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                        <!-- Close Button -->
+                        <Button Width="36"
+                                Height="32"
+                                Background="Transparent"
+                                Foreground="White"
+                                FontWeight="Bold"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                Click="CloseButton_Click">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="border"
+                                            Background="Transparent"
+                                            CornerRadius="6">
+                                        <ContentPresenter HorizontalAlignment="Center"
+                                                          VerticalAlignment="Center"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="#20D6A1"/>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="#00A06A"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                            ✕
+                        </Button>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <!-- Main Content -->
+            <Border Grid.Row="1" Padding="20" Background="Transparent">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Main Title -->
+                    <TextBlock Grid.Row="0"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Foreground="#1F2937"
+                               Margin="0,0,0,20"
+                               TextWrapping="Wrap"
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center"
+                               Width="240">
+                        Image to 3MF
+                        <LineBreak/>
+                        Topographical Converter
+                    </TextBlock>
+
+                    <!-- Settings + Drop Zone -->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Settings Column -->
+                        <StackPanel Grid.Column="0"
+                                    Orientation="Vertical"
+                                    HorizontalAlignment="Left"
+                                    Width="170">
+                            <!-- Project Settings -->
+                            <Border Background="White"
+                                    Padding="12"
+                                    CornerRadius="8"
+                                    BorderBrush="#D9E1E8"
+                                    BorderThickness="1">
+                                <StackPanel>
+                                    <TextBlock Text="Project Settings"
+                                               FontWeight="Bold"
+                                               FontSize="14"
+                                               Foreground="#1F2937"
+                                               Margin="0 0 0 8"/>
+                                    <TextBlock Text="Total Height (mm)" Foreground="#1F2937"/>
+                                    <TextBox Text="30" Margin="0 2 0 6"/>
+                                    <TextBlock Text="Scale X/Y" Foreground="#1F2937"/>
+                                    <TextBox Text="1.0" Margin="0 2 0 0"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Output Info -->
+                            <Border Background="White"
+                                    Padding="10"
+                                    CornerRadius="8"
+                                    BorderBrush="#D9E1E8"
+                                    BorderThickness="1"
+                                    Height="107"
+                                    Margin="0,8,0,0">
+                                <StackPanel>
+                                    <TextBlock Text="Output Information"
+                                               FontWeight="Bold"
+                                               FontSize="13"
+                                               Foreground="#1F2937"
+                                               Margin="0 0 0 4"/>
+                                    <TextBlock Text="Expected size (mm):" Foreground="#1F2937"/>
+                                    <TextBlock Text="0x0x0" Margin="0 2" Foreground="#1F2937"/>
+                                    <TextBlock Text="Bands used (RGBA):" Foreground="#1F2937"/>
+                                    <TextBlock Text="0 Bands" Margin="0 2" Foreground="#1F2937"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Generate Button -->
+                            <Button Content="Generate"
+                                    Width="170"
+                                    Style="{StaticResource RoundedButtonStyle}"
+                                    Margin="0,10,0,0"
+                                    Height="28"/>
+                        </StackPanel>
+
+                        <!-- Drop Zone + Error -->
+                        <StackPanel Grid.Column="1"
+                                    HorizontalAlignment="Right"
+                                    Width="170"
+                                    VerticalAlignment="Top">
+                            <!-- Drop Zone -->
+                            <Border Background="White"
+                                    BorderBrush="#00B37E"
+                                    BorderThickness="2"
+                                    CornerRadius="10"
+                                    Padding="20"
+                                    Height="234"
+                                    AllowDrop="True">
+                                <StackPanel HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                                    <TextBlock Text="🖼"
+                                               FontSize="28"
+                                               HorizontalAlignment="Center"
+                                               Foreground="#00B37E"/>
+                                    <TextBlock FontSize="12"
+                                               TextAlignment="Center"
+                                               TextWrapping="Wrap"
+                                               Foreground="#1F2937"
+                                               Margin="0 8 0 0">
+                                        Drag an image file here
+                                        <LineBreak/>
+                                        to convert it to 3MF
+                                    </TextBlock>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Error Message -->
+                            <TextBlock x:Name="ErrorMessage"
+                                       Text="Error Message"
+                                       FontSize="12"
+                                       TextWrapping="Wrap"
+                                       Foreground="#1F2937"
+                                       Padding="10,18,0,0"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>
