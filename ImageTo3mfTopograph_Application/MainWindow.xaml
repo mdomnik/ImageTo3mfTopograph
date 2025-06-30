@@ -45,6 +45,14 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!-- Soft Shadow Effect -->
+        <DropShadowEffect x:Key="SoftShadow"
+                          BlurRadius="8"
+                          ShadowDepth="2"
+                          Direction="270"
+                          Opacity="0.2"
+                          Color="Black"/>
     </Window.Resources>
 
     <Border CornerRadius="12" Background="#F9FAF8">
@@ -59,7 +67,8 @@
                     Background="#00B37E"
                     Height="32"
                     MouseDown="TitleBar_MouseDown"
-                    CornerRadius="12,12,0,0">
+                    CornerRadius="12,12,0,0"
+                    Effect="{StaticResource SoftShadow}">
                 <DockPanel LastChildFill="True">
                     <TextBlock Text="Ito3mf"
                                FontWeight="Bold"
@@ -67,7 +76,6 @@
                                Foreground="White"
                                VerticalAlignment="Center"
                                Margin="10,0,0,0"/>
-
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <!-- Minimize Button -->
                         <Button Width="36"
@@ -213,7 +221,8 @@
                                     Width="170"
                                     Style="{StaticResource RoundedButtonStyle}"
                                     Margin="0,10,0,0"
-                                    Height="28"/>
+                                    Height="28"
+                                    Effect="{StaticResource SoftShadow}"/>
                         </StackPanel>
 
                         <!-- Drop Zone + Error -->
@@ -228,7 +237,8 @@
                                     CornerRadius="10"
                                     Padding="20"
                                     Height="234"
-                                    AllowDrop="True">
+                                    AllowDrop="True"
+                                    Effect="{StaticResource SoftShadow}">
                                 <StackPanel HorizontalAlignment="Center"
                                             VerticalAlignment="Center">
                                     <TextBlock Text="🖼"
