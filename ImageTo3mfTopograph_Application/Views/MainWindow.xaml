@@ -210,10 +210,6 @@
                                     Orientation="Vertical"
                                     HorizontalAlignment="Left"
                                     Width="170">
-                            <!-- Project Settings -->
-
-                            <!-- Output Info -->
-                            <!-- Project Settings -->
 
                             <!-- Output Info -->
                             <!-- Project Settings -->
@@ -231,7 +227,9 @@
                                     <TextBlock Text="Total Height (mm)" Foreground="#1F2937"/>
                                     <TextBox x:Name="HeightIn" Text="30" Margin="0 2 0 6" TextChanged="HeightIn_TextChanged"/>
                                     <TextBlock Text="Scale X/Y" Foreground="#1F2937"/>
-                                    <TextBox x:Name="ScaleIn" Text="1.0" Margin="0 2 0 0" TextChanged="ScaleIn_TextChanged"/>
+                                    <TextBox x:Name="ScaleIn" Text="1.0" Margin="0 2 0 6" TextChanged="ScaleIn_TextChanged"/>
+                                    <TextBlock Text="Max Layer Count" Foreground="#1F2937"/>
+                                    <TextBox x:Name="MaxLayerCountIn" Text="4" Margin="0 2 0 6" TextChanged="MaxLayerCountIn_TextChanged"/>
                                 </StackPanel>
                             </Border>
 
@@ -255,14 +253,6 @@
                                     <TextBlock Text="0 Bands" Margin="0 2" Foreground="#1F2937"/>
                                 </StackPanel>
                             </Border>
-
-                            <!-- Generate Button -->
-                            <Button Content="Load Image"
-                                    Width="170"
-                                    Style="{StaticResource RoundedButtonStyle}"
-                                    Margin="0,15,0,0"
-                                    Height="28"
-                                    Effect="{StaticResource SoftShadow}" Click="Button_Click"/>
                         </StackPanel>
 
                         <!-- Drop Zone + Error -->
@@ -270,9 +260,7 @@
                                     HorizontalAlignment="Right"
                                     Width="170"
                                     VerticalAlignment="Top">
-                            <!-- Drop Zone -->
 
-                            <!-- Error Message -->
                             <!-- Drop Zone -->
                             <Border x:Name="DropZone"
                                     Background="White"
@@ -311,6 +299,13 @@
                                     </StackPanel>
                                 </Grid>
                             </Border>
+                            <!-- Generate Button -->
+                            <Button Content="Load Image"
+                                    Width="170"
+                                    Style="{StaticResource RoundedButtonStyle}"
+                                    Margin="0,15,0,0"
+                                    Height="28"
+                                    Effect="{StaticResource SoftShadow}" Click="Button_Click"/>
 
                             <!-- Error Message -->
                             <TextBlock x:Name="ErrorMessage"
@@ -318,6 +313,7 @@
                                        FontSize="12"
                                        TextWrapping="Wrap"
                                        Foreground="#1F2937"
+                                       Visibility="Collapsed"
                                        Padding="10,18,0,0"
                                        HorizontalAlignment="Center" Height="47" Width="167"/>
                         </StackPanel>

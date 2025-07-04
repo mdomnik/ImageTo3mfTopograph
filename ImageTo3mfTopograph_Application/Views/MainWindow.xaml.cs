@@ -156,6 +156,24 @@ namespace ImageTo3mfTopograph_Application.Views
             }
         }
 
+        private void MaxLayerCountIn_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (int.TryParse(MaxLayerCountIn.Text, out int max))
+            {
+                if (max <= 0)
+                {
+                    ScaleIn.Background = new SolidColorBrush(Color.FromRgb(255, 229, 229));
+                    return;
+                }
+                ImageLoader.maxLayerCount = max;
+                ScaleIn.ClearValue(BackgroundProperty);
+            }
+            else
+            {
+                ScaleIn.Background = new SolidColorBrush(Color.FromRgb(255, 229, 229));
+            }
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (ImageLoader.inputImage == null)

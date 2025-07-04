@@ -17,6 +17,7 @@ namespace ImageTo3mfTopograph_Application.Sources
         public static List<bool[,]>? colorMasks { get; set; }
         public static double inputHeight { get; set; } = 30.0;
         public static double inputScale { get; set; } = 1.0;
+        public static int maxLayerCount { get; set; } = 4;
 
         public static void SaveMasksToDirectory(List<bool[,]> masks, string folderPath)
         {
